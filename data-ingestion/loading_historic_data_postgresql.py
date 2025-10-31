@@ -17,8 +17,8 @@ conn_string = f'postgresql+psycopg2://{posgres_user}:{posgres_pass}@localhost:54
 engine = create_engine(conn_string)
 conn = engine.connect()
 
-# creating empy table with correct column names and data types
-sql_table = '''CREATE TABLE daily_stock_data(ticker text, open numeric(10,2), high numeric(10,2), low numeric(10,2), close numeric(10,2), volume bigint, vwap numeric(10,2), timestamp bigint, transactions bigint, trading_date date, retrieved_date timestamp)'''
+# creating empy table with correct column names and data types and primary key (ticker, trading_date)
+sql_table = '''CREATE TABLE daily_stock_data(ticker text, open numeric(10,2), high numeric(10,2), low numeric(10,2), close numeric(10,2), volume bigint, vwap numeric(10,2), timestamp bigint, transactions bigint, trading_date date, retrieved_date timestamp, PRIMARY KEY(ticker, trading_date))'''
 conn.execute(text(sql_table))
 conn.commit()
 
